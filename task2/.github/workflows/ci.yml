@@ -1,0 +1,44 @@
+name: Python CI Pipeline
+
+# Trigger the workflow on push or pull request to the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the code from the repository
+    - uses: actions/checkout@v3
+
+    # Step 2: Set up Python environment
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+
+    # Step 3: Install dependencies (if any)
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+
+        # ... (keep previous steps)
+
+    # Step 4: Run Tests
+    - name: Run Unit Tests
+      run: python -m unittest test_app.py
+
+    # Step 5: Create a dummy build artifact (e.g., a log file)
+    - name: Create Build Artifact
+      run: echo "Build successful on $(date)" > build_log.txt
+
+    # Step 6: Upload the Artifact so you can download it from GitHub
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-log
+        path: build_log.txt
