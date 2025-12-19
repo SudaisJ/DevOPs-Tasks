@@ -1,0 +1,10 @@
+version: "3"
+services:
+  web:
+    image: my-flask-app  # Uses the image we just built
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+  redis:
+    image: "redis:alpine" # Pulls a small official Redis image
