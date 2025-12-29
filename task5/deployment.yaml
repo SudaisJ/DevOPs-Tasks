@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-deployment  # The name of the "Manager"
+spec:
+  replicas: 3              # We want 3 identical clones running!
+  selector:
+    matchLabels:
+      app: my-web-app
+  template:                # This is the template for the Workers (Pods)
+    metadata:
+      labels:
+        app: my-web-app
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest  # The image to run
+        ports:
+        - containerPort: 80
