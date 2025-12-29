@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-web-service
+spec:
+  type: NodePort           # This pokes a hole in the cluster wall so we can enter
+  selector:
+    app: my-web-app        # <--- IMPORTANT: Matches the label we gave our Deployment!
+  ports:
+    - protocol: TCP
+      port: 80             # The Service's port
+      targetPort: 80       # The Container's port (Nginx listens on 80)
+      nodePort: 30005      # The door we will use (must be 30000-32767)
