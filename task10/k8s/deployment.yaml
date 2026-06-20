@@ -11,6 +11,10 @@ spec:
     metadata:
       labels:
         app: task10-app
+      annotations:
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/role: 'opsforge-app'
+        vault.hashicorp.com/agent-inject-secret-database: 'secret/data/opsforge/database'
     spec:
       containers:
       - name: task10-app
