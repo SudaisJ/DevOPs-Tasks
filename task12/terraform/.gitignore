@@ -1,0 +1,5 @@
+.terraform/
+*.tfstate
+*.tfstate.backup
+opsforge_key
+opsforge_key.pub
